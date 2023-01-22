@@ -62,9 +62,8 @@ def validate_config(config):
         'user',
         'warehouse',
         'file_format',
-        'aws_region_name',
-        'snowflake_private_key_aws_parameter_name',
-        'snowflake_private_key_code_aws_parameter_name'
+        'snowflake_private_key',
+        'snowflake_private_key_code'
     ]
 
     required_config_keys = []
@@ -339,19 +338,11 @@ class DbSync:
         if self.connection_config.get('password'):
             self.logger.info('Connecting using basic auth')
             connection_params['password'] = self.connection_config['password']
-        elif self.connection_config.get('snowflake_private_key_aws_parameter_name'):
+        elif self.connection_config.get('snowflake_private_key'):
             self.logger.info('Connecting using key pair auth')
 
-            key = get_secure_parameter(
-                self.connection_config["snowflake_private_key_aws_parameter_name"],
-                region_name=self.connection_config["aws_region_name"],
-                session_profile_name=self.connection_config.get("aws_profile"),
-            )
-            key_code = get_secure_parameter(
-                self.connection_config["snowflake_private_key_code_aws_parameter_name"],
-                region_name=self.connection_config["aws_region_name"],
-                session_profile_name=self.connection_config.get("aws_profile"),
-            )
+            key = self.connection_config['snowflake_private_key']
+            key_code = self.connection_config['snowflake_private_key_code']
             p_key = serialization.load_pem_private_key(
                 bytes(key, "utf-8"), password=key_code.encode(), backend=default_backend()
             )
