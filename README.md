@@ -13,7 +13,7 @@ This is a [PipelineWise](https://transferwise.github.io/pipelinewise) compatible
   - namespace: target-snowflake-key-auth
   - pip_url: git+https://github.com/JamieSplitit/pipelinewise-target-snowflake-key-auth.git
   - executable name: target-snowflake-key-auth
-  - settings: `account,dbname,user,warehouse,file_format,role,default_target_schema,snowflake_private_key,snowflake_private_key_code,data_flattening_max_level:integer,add_metadata_columns:boolean`
+  - settings: `account,dbname,user,warehouse,file_format,role,default_target_schema,snowflake_private_key,snowflake_private_key_code,data_flattening_max_level:integer,add_metadata_columns:boolean,batch_size_rows:integer,batch_wait_limit_seconds:integer,flush_all_streams:boolean,parallelism:integer,parallelism_max:integer,hard_delete:boolean`
 
 ## How to use it
 
