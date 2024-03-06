@@ -49,11 +49,12 @@ def validate_config(config):
         'account',
         'dbname',
         'user',
-        'password',
         'warehouse',
         's3_bucket',
         'stage',
-        'file_format'
+        'file_format',
+        'snowflake_private_key',
+        'snowflake_private_key_code'
     ]
 
     snowflake_required_config_keys = [
