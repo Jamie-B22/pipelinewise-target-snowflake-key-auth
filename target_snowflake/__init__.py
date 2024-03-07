@@ -480,7 +480,8 @@ def flush_records(stream: str,
 
         archive_schema = stream_name_parts['schema_name']
         archive_table = stream_name_parts['table_name']
-        archive_tap = archive_load_files['tap']
+        # Originally the next line was: archive_tap = archive_load_files['tap']. Due to missing tap_id in config the following if condition was added
+        archive_tap = archive_load_files['tap'] if archive_load_files['tap'] else stream_name_parts['catalog_name']
 
         archive_metadata = {
             'tap': archive_tap,
@@ -498,7 +499,8 @@ def flush_records(stream: str,
 
         # Use same file name as in import
         archive_file = os.path.basename(s3_key)
-        archive_key = f"{archive_tap}/{archive_table}/{archive_file}"
+        # Originally the next line was: archive_key = f"{archive_tap}/{archive_table}/{archive_file}"
+        archive_key = f"archive/{archive_table}/{archive_file}"
 
         db_sync.copy_to_archive(s3_key, archive_key, archive_metadata)
 
