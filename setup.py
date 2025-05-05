@@ -23,10 +23,10 @@ setup(name="pipelinewise-target-snowflake-key-auth",
       python_requires='>=3.7',
       install_requires=[
           'pipelinewise-singer-python==1.*',
-          'snowflake-connector-python[pandas]==2.7.*',
+          'snowflake-connector-python[pandas]==3.15.*',
           'inflection==0.5.1',
           'joblib==1.2.0',
-          'boto3==1.23.10',
+          'boto3==1.24.*',
           'numpy==1.26.4',
       ],
       extras_require={
